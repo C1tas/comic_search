@@ -9,6 +9,5 @@ env
 upload_post
 logs
 run
-gunicorn_start
 comic_pic
 comic_pic_2

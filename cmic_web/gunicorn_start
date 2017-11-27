@@ -1,0 +1,37 @@
+#!/bin/bash
+
+NAME="flask-blog"                                  # Name of the application
+FLASKDIR=/srv/http/comic_search           # Django project directory
+SOCKFILE=$FLASKDIR/run/gunicorn.sock  # we will communicte using this unix socket
+USER=http                                     # the user to run as
+GROUP=http                                    # the group to run as
+NUM_WORKERS=4                                    # how many worker processes should Gunicorn spawn
+# DJANGO_SETTINGS_MODULE=hack_web.settings             # which settings file should Django use
+DJANGO_WSGI_MODULE=comic_search.wsgi                     # WSGI module name
+LOGFILE=$FLASKDIR/log/gunicorn.log
+
+echo "Starting $NAME as `whoami`"
+
+# Activate the virtual environment
+cd $DJANGODIR
+source /srv/http/.pyenv/versions/comic_search/bin/activate
+# export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+export PYTHONPATH=$DJANGODIR:$PYTHONPATH
+export PATH=/srv/http/.gem/ruby/2.4.0/bin:$PATH
+# export SECRET_KEY='your_secret_key'
+# Create the run directory if it doesn't exist
+RUNDIR=$(dirname $SOCKFILE)
+test -d $RUNDIR || mkdir -p $RUNDIR
+LOGDIR=$(dirname $LOGFILE)
+test -d $LOGDIR || mkdir -p $LOGDIR
+
+# Start your Django Unicorn
+# Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)
+exec /srv/http/.pyenv/versions/bin/gunicorn ${FLASKDIR_WSGI_MODULE}:app \
+  --name $NAME \
+  --workers $NUM_WORKERS \
+  --user=$USER --group=$GROUP \
+  --bind=unix:$SOCKFILE \
+  --log-level=debug \
+  --reload \
+  --log-file=$LOGFILE
