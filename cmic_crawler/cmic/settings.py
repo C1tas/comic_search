@@ -96,7 +96,7 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 
-IMAGES_STORE = '/Users/cytas/Resilio_Sync/apps/comic_search/comic_pic_2'
+IMAGES_STORE = '/srv/http/static/cmic_img'
 
 
 db_type = 'postgresql'
