@@ -27,7 +27,7 @@ test -d $LOGDIR || mkdir -p $LOGDIR
 
 # Start your Django Unicorn
 # Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)
-exec /srv/http/.pyenv/comic_search/versions/bin/gunicorn ${FLASKDIR_WSGI_MODULE}:app \
+exec /srv/http/.pyenv/versions/comic_search/bin/gunicorn ${FLASKDIR_WSGI_MODULE}:app \
   --name $NAME \
   --workers $NUM_WORKERS \
   --user=$USER --group=$GROUP \
