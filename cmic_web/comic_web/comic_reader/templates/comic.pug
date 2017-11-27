@@ -1,0 +1,13 @@
+!!! 5
+html(lang="en")
+    head
+        title= pageTitle
+        script(src="{{ url_for('static', filename = 'js/reader.js') }}")
+    body
+        h1.title reader page
+    #container
+        ul
+            {% for i in temp_comic_list %}
+            li
+                a(href='/{{ i }}'){{ i }}
+            {% endfor %}

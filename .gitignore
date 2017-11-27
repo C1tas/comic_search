@@ -1,0 +1,14 @@
+**/media/**
+**/__pycache__/**
+**/myenv/**
+**/CACHE/**
+.idea
+env
+.sass-cache
+.DS_Store
+upload_post
+logs
+run
+gunicorn_start
+comic_pic
+comic_pic_2
