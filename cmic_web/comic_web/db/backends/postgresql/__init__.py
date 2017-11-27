@@ -35,7 +35,7 @@ class Comicbook(base_article):
     update_date = Column(Date, nullable=True)
 
 
-print(CreateTable(Comicbook.__table__).compile(dialect=postgresql.dialect()))
+# print(CreateTable(Comicbook.__table__).compile(dialect=postgresql.dialect()))
 
 
 class Client:
