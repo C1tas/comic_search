@@ -1,13 +1,13 @@
 #!/bin/bash
 
-NAME="flask-blog"                                  # Name of the application
-FLASKDIR=/srv/http/comic_search           # Django project directory
+NAME="flask-comic"                                  # Name of the application
+FLASKDIR=/srv/http/comic_search/cmic_web           # Django project directory
 SOCKFILE=$FLASKDIR/run/gunicorn.sock  # we will communicte using this unix socket
 USER=http                                     # the user to run as
 GROUP=http                                    # the group to run as
 NUM_WORKERS=4                                    # how many worker processes should Gunicorn spawn
 # DJANGO_SETTINGS_MODULE=hack_web.settings             # which settings file should Django use
-DJANGO_WSGI_MODULE=comic_search.wsgi                     # WSGI module name
+FLASK_WSGI_MODULE=comic_web.wsgi                     # WSGI module name
 LOGFILE=$FLASKDIR/log/gunicorn.log
 
 echo "Starting $NAME as `whoami`"
@@ -25,9 +25,9 @@ test -d $RUNDIR || mkdir -p $RUNDIR
 LOGDIR=$(dirname $LOGFILE)
 test -d $LOGDIR || mkdir -p $LOGDIR
 
-# Start your Django Unicorn
+# Start your Flask Unicorn
 # Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)
-exec /srv/http/.pyenv/versions/comic_search/bin/gunicorn ${FLASKDIR_WSGI_MODULE}:app \
+exec /srv/http/.pyenv/versions/comic_search/bin/gunicorn ${FLASK_WSGI_MODULE}:app \
   --name $NAME \
   --workers $NUM_WORKERS \
   --user=$USER --group=$GROUP \
