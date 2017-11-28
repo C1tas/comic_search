@@ -13,7 +13,7 @@ LOGFILE=$FLASKDIR/log/gunicorn.log
 echo "Starting $NAME as `whoami`"
 
 # Activate the virtual environment
-cd $DJANGODIR
+cd $FLASKDIR
 source /srv/http/.pyenv/versions/comic_search/bin/activate
 # export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
