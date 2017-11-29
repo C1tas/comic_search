@@ -9,5 +9,5 @@ html(lang="en")
         ul
             {% for i in temp_hash_list %}
             li
-                img(src='http://127.0.0.1:8000/{{ i }}.jpg')
+                img(src='/static/{{ i }}.jpg')
             {% endfor %}
